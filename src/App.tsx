@@ -1,26 +1,52 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useState} from 'react';
 import './App.css';
+import {Accordion} from "./components/Accordion/Accordion";
+import {Rating, RatingValueType} from "./components/Rating/Rating";
+import {UncontrolledOnOff} from "./components/UncontrolledOnOff/UncontrolledOnOff";
+import {UncontrolledRating} from "./components/UncontrolledRating/UncontrolledRating";
+import {OnOff} from "./components/OnOff/OnOff";
+import UncontrolledAccordion from "./components/UncontrolledAccordion/UncontrolledAccordion";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+
+function App(props: any) {
+
+    let [ratingValue, setRatingValue] = useState<RatingValueType>(0)
+    let [accordionCollapsed, setAccordionCollapsed] = useState<boolean>(true)
+    let [switchOn, setSwitchOn] = useState<boolean>(false)
+
+    let items = [
+        {title: 'None', value: '0'},
+        {title: 'Alex', value: '1'},
+        {title: 'Vika', value: '2'},
+        {title: 'Yana', value: '3'},
+        {title: 'Natasha', value: '4'}];
+
+
+    const onClick = (name:string) => {
+        alert(`${name} ${'will be happy!'}`)
+    }
+
+    return (
+        <div className={"App"}>
+            <OnOff on={switchOn} onChange={setSwitchOn}/>
+            <Rating value={ratingValue} onClick={setRatingValue}/>
+            <Accordion titleValue={"Users"} collapsed={accordionCollapsed} onChange={() => setAccordionCollapsed(!accordionCollapsed)} items={items} onClick={onClick}/>
+            <UncontrolledOnOff onChange={setSwitchOn}/> {switchOn.toString()}
+            <UncontrolledAccordion titleValue={"Menu"}/>
+            <UncontrolledAccordion titleValue={"Users"}/>
+            <UncontrolledRating onChange={()=>{}}/>
+
+        </div>
+    );
+}
+
+type PageTitlePropsType = {
+    title: string
+}
+
+function PageTitle(props: PageTitlePropsType) {
+    return <h1>{props.title}</h1>
 }
 
 export default App;
