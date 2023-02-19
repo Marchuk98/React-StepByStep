@@ -6,6 +6,7 @@ import {UncontrolledOnOff} from "./components/UncontrolledOnOff/UncontrolledOnOf
 import {UncontrolledRating} from "./components/UncontrolledRating/UncontrolledRating";
 import {OnOff} from "./components/OnOff/OnOff";
 import UncontrolledAccordion from "./components/UncontrolledAccordion/UncontrolledAccordion";
+import {Select} from "./components/Select/Select";
 
 
 
@@ -14,6 +15,7 @@ function App(props: any) {
     let [ratingValue, setRatingValue] = useState<RatingValueType>(0)
     let [accordionCollapsed, setAccordionCollapsed] = useState<boolean>(true)
     let [switchOn, setSwitchOn] = useState<boolean>(false)
+    const [select , setSelect] = useState(false)
 
     let items = [
         {title: 'None', value: '0'},
@@ -36,6 +38,7 @@ function App(props: any) {
             <UncontrolledAccordion titleValue={"Menu"}/>
             <UncontrolledAccordion titleValue={"Users"}/>
             <UncontrolledRating onChange={()=>{}}/>
+            <Select value={select} onChange={setSelect} items={items}/>
 
         </div>
     );
