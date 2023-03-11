@@ -32,3 +32,31 @@ export const SimpleExample = () => {
 
     </>
 }
+
+export const SetTimeoutExample = () => {
+
+    const [counter, setCounter] = useState(new Date())
+
+    console.log('SetTimeoutExample')
+
+    // useEffect(() => {
+    //     setTimeout(()=> {
+    //         console.log("setTimeout")
+    //         document.title = counter.toString()
+    //     },1000)
+    // },[]);
+
+    useEffect(() => {
+        const Interval = setInterval(()=> {
+            setCounter(new Date());
+        },1000);
+        return () => clearInterval(Interval);
+    },[]);
+
+    return <>
+            <h1>Clock</h1>
+        <p>{counter.toLocaleTimeString()}</p>
+    </>
+}
+
+
