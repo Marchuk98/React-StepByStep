@@ -39,13 +39,6 @@ export const SetTimeoutExample = () => {
 
     console.log('SetTimeoutExample')
 
-    // useEffect(() => {
-    //     setTimeout(()=> {
-    //         console.log("setTimeout")
-    //         document.title = counter.toString()
-    //     },1000)
-    // },[]);
-
     useEffect(() => {
         const Interval = setInterval(()=> {
             setCounter(new Date());
@@ -56,6 +49,32 @@ export const SetTimeoutExample = () => {
     return <>
             <h1>Clock</h1>
         <p>{counter.toLocaleTimeString()}</p>
+    </>
+}
+
+export const KeysTrackerExample = () => {
+    const [text, setText] = useState('')
+    console.log('Component rendered with ' + text)
+
+    useEffect(() => {
+
+            const handler = (e: KeyboardEvent) => {
+                console.log(e.key)
+                setText(text + e.key)
+            }
+
+            window.addEventListener('keypress', handler)
+
+            return () => {
+                console.log('RESET EFFECT')
+                window.removeEventListener('keypress', handler)
+            }
+
+        }, [text]
+    )
+
+    return <>
+        Typed text: {text}
     </>
 }
 
